@@ -21,6 +21,9 @@ const user = new Schema({
         required: true,
         default: [],
         type: [Schema.Types.ObjectId]
+    },
+    currentAvatar: {
+        type: Schema.Types.ObjectId
     }
 })
 

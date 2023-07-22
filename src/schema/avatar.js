@@ -10,7 +10,7 @@ const avatar = new Schema({
         required: true,
         type: Number
     },
-    avataImagePath: {
+    avatarImagePath: {
         required: true,
         type: String
     },
