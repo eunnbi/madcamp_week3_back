@@ -56,13 +56,13 @@ router.post('/buyAvatar', async (req, res) => {
 
         if(me.cherry < avatarToBuy.price) {
             res.status(400).json({ error: 'too expensive.' });
+        } else { 
+            me.cherry -= avatarToBuy.price;
+            me.myAvatarList.push(avatarId);
+            await me.save();
+    
+            res.status(200).json();
         }
-
-        me.cherry -= avatarToBuy.price;
-        me.myAvatarList.push(avatarId);
-        await me.save();
-
-        res.status(200).json();
     } catch (err) {
         res.status(500).json({ error: 'An error occurred while fetching the comments.' });
     }
@@ -105,6 +105,20 @@ router.post('/add', async (req, res) => {
         const savedUser = await newUser.save();
         res.json(savedUser);
     } catch (err) {
+        res.status(500).json({ error: 'An error occurred while adding the user.' });
+    }
+});
+
+
+// 가구들 추가하기
+router.post('/adds', async (req, res) => {
+    const { avatars } = req.body;
+    try {
+        const newAvatars = await Avatar.insertMany(avatars);
+        // const savedFurniture = await newFurniture.save();
+        res.json(newAvatars);
+    } catch (err) {
+        console.log(err);
         res.status(500).json({ error: 'An error occurred while adding the user.' });
     }
 });

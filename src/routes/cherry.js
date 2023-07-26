@@ -50,7 +50,6 @@ router.post('/addCherry', async (req, res) => {
         user.cherry += cherry;
 
         await user.save();
-        await sponsor.save();
         
         res.status(200).json(donatedCherry);
     } catch (err) {

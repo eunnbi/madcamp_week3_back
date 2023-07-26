@@ -28,10 +28,13 @@ router.post('/add', async (req, res) => {
     const myFurnitureList = [];
     const myAvatarList = [];
     const allAvatar = await Avatar.find();
+    console.log(allAvatar.length);
     const defaultAvatar = allAvatar[0].id;
+    myAvatarList.push(defaultAvatar);
+    console.log(defaultAvatar);
     try {
-        const tempString = '123';
-        const newUser = new User({ name, cherry, myFurnitureList, myAvatarList, defaultAvatar });
+        const tempString = '안녕!';
+        const newUser = new User({ name, cherry, myFurnitureList, myAvatarList, currentAvatar : defaultAvatar });
         const newUserId = newUser.id;
         const newRoom = new Room({userId : newUserId, avatarId : defaultAvatar, greeting : tempString}); // 수정이 필요함
         await newRoom.save();

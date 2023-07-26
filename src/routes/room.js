@@ -23,4 +23,16 @@ router.post('/getRoom', async (req, res) => {
     }
 });
 
+// 인사말 정보 저장하기
+router.post('/setGreeting', async (req, res) => {
+    const {roomId, greeting} = req.body;
+    try {
+        const myRoom = await Room.findByIdAndUpdate(roomId, {greeting}, {new:true});
+        res.status(200).json(myRoom);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: 'An error occurred while fetching the comments.' });
+    }
+});
+
 module.exports = router;

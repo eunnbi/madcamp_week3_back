@@ -13,7 +13,11 @@ const furniture = new Schema({
     imagePath: {
         required: true,
         type: String
-    }    
+    },
+    category: {
+        required: true,
+        type: Number
+    }
 })
 
 
