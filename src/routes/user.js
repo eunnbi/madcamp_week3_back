@@ -21,15 +21,15 @@ router.post('/checkDuplicate', async (req, res) => {
 
 // 유저 추가, 확인 완료
 router.post('/add', async (req, res) => {
-    console.log("123");
     const { name } = req.body;
     console.log(name);
     const cherry = 100;
     const myFurnitureList = [];
     const myAvatarList = [];
-    const allAvatar = await Avatar.find();
+    const avatarName = "평?범한 넙죽이"
+    const allAvatar = await Avatar.findOne({name: avatarName});
     console.log(allAvatar.length);
-    const defaultAvatar = allAvatar[0].id;
+    const defaultAvatar = allAvatar.id;
     myAvatarList.push(defaultAvatar);
     console.log(defaultAvatar);
     try {

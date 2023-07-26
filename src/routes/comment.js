@@ -12,12 +12,13 @@ const mongoose = require('mongoose');
 router.post('/getComment', async (req, res) => {
     const { roomId } = req.body;
     try {
-        const comments = await Comment.find({ roomId });
+        // const comments = await Comment.find({ roomId });
+        const comments = await Comment.find({ roomId }).sort({ createdAt: -1 });
         let result = [];
         for(let i=0 ; i<comments.length ; i++) {
             const commentContent = comments[i].content;
             const author = await User.findById(comments[i].authorId);
-            result.push({
+            result.unshift({
                 authorName : author.name,
                 content : commentContent
             })
